@@ -25,9 +25,9 @@ python eval_robot/eval_g1.py \
     --visualization=true
 
 
-# 1. 📦 Environment Setup
+# 1.  Environment Setup
 
-## 1.1 🦾 LeRobot Environment Setup
+## 1.1  LeRobot Environment Setup
 
 ```bash
 # Clone the source code
@@ -50,7 +50,7 @@ cd unitree_lerobot/lerobot && pip install -e .
 cd ../../ && pip install -e .
 ```
 
-## 1.2 🕹️ unitree_sdk2_python
+## 1.2  unitree_sdk2_python
 
 For `DDS communication` on Unitree robots, some dependencies need to be installed. Follow the installation steps below:
 
@@ -59,9 +59,9 @@ git clone https://github.com/unitreerobotics/unitree_sdk2_python.git
 cd unitree_sdk2_python  && pip install -e .
 ```
 
-# 2. ⚙️ Data Collection and Conversion
+# 2.  Data Collection and Conversion
 
-## 2.1 🖼️ Load Datasets
+## 2.1  Load Datasets
 
 If you want to directly load the dataset we have already recorded,
 Load the [`unitreerobotics/G1_Dex3_ToastedBread_Dataset`](https://huggingface.co/datasets/unitreerobotics/G1_Dex3_ToastedBread_Dataset) dataset from Hugging Face. The default download location is `~/.cache/huggingface/lerobot/unitreerobotics`. If you want to load data from a local source, please change the `root` parameter.
@@ -90,11 +90,11 @@ python src/lerobot/scripts/lerobot_dataset_viz.py \
     --episode-index 0
 ```
 
-## 2.2 🔨 Data Collection
+## 2.2  Data Collection
 
 If you want to record your own dataset. The open-source teleoperation project [avp_teleoperate](https://github.com/unitreerobotics/avp_teleoperate/tree/g1) can be used to collect data using the Unitree G1 humanoid robot. For more details, please refer to the [avp_teleoperate](https://github.com/unitreerobotics/avp_teleoperate/tree/g1) project.
 
-## 2.3 ✂️Data Processing
+## 2.3 Data Processing
 
 ```bash
 conda activate unitree_lerobot
@@ -119,7 +119,7 @@ test_dataset/
 ```
 
 
-## 2.4 🛠️ Data Conversion
+## 2.4  Data Conversion
 
 The data collected using [avp_teleoperate](https://github.com/unitreerobotics/avp_teleoperate/tree/g1) is stored in JSON format. Assuming the collected data is stored in the `$HOME/datasets/task_name`, the format is as follows
 
@@ -136,7 +136,7 @@ datasets/                               # Dataset folder
         ├── episode_xxx
 ```
 
-### 2.4.1 🔀 Sort and Rename
+### 2.4.1  Sort and Rename
 
 When generating datasets for LeRobot, it is recommended to ensure that the data naming convention, starting from `episode_0`, is sequential and continuous. You can use the following script to `sort and rename` the data accordingly.
 
@@ -145,7 +145,7 @@ python unitree_lerobot/utils/sort_and_rename_folders.py \
         --data_dir $HOME/datasets/task_name
 ```
 
-#### 2.4.2 🔄 Conversion
+#### 2.4.2  Conversion
 
 Convert `Unitree JSON` Dataset to `LeRobot` Format. You can define your own `robot_type` based on [ROBOT_CONFIGS](https://github.com/unitreerobotics/unitree_lerobot/blob/main/unitree_lerobot/utils/convert_unitree_json_to_lerobot.py#L154).
 
@@ -162,7 +162,7 @@ python unitree_lerobot/utils/convert_unitree_json_to_lerobot.py \
     --push_to_hub
 ```
 
-# 3. 🚀 Training
+# 3.  Training
 
 [For training, please refer to the official LeRobot training example and parameters for further guidance.](https://github.com/huggingface/lerobot/tree/main/docs/source)
 
@@ -233,7 +233,7 @@ python src/lerobot/scripts/lerobot_train.py \
 
 If you want to use multi-GPU training, please refer to the details [here](https://github.com/huggingface/lerobot/blob/main/docs/source/multi_gpu_training.mdx)
 
-# 4. 🤖 Real-World Testing
+# 4.  Real-World Testing
 
 To test your trained model on a real robot, you can use the eval_g1.py script located in the eval_robot folder. Here’s how to run it:
 
@@ -294,7 +294,7 @@ python unitree_lerobot/eval_robot/eval_g1_dataset.py  \
     --send_real_robot=false
 ```
 
-# 5. 🎬 Replay Datasets On Robot
+# 5.  Replay Datasets On Robot
 
 This section provides instructions on how to replay datasets on the robot.
 It is useful for testing and validating the robot's behavior using pre-recorded data.

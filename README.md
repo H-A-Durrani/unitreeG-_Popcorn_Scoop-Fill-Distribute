@@ -1,40 +1,28 @@
-<div align="center">
-  <h1 align="center"> unitree_lerobot </h1>
-  <h3 align="center"> Unitree Robotics </h3>
-  <p align="center">
-    <a href="./README.md"> English </a> | <a href="./docs/README_zh.md">中文</a>
-  </p>
-    <p align="center">
-     <a href="https://discord.gg/ZwcVwxv5rq" target="_blank"><img src="https://img.shields.io/badge/-Discord-5865F2?style=flat&logo=Discord&logoColor=white" alt="Unitree LOGO"></a>
-  </p>
-</div>
 
-| Unitree Robotics repositories                      | link                                                                               |
-| -------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Unitree Datasets                                   | [unitree datasets](https://huggingface.co/unitreerobotics)                         |
-| AVP Teleoperate                                    | [avp_teleoperate](https://github.com/unitreerobotics/avp_teleoperate)              |
-| Unitree Sim IsaacLab                               | [unitree_sim_isaaclab](https://github.com/unitreerobotics/unitree_sim_isaaclab)    |
-| Conversion of various versions of lerobot datasets | [any4lerobot](https://github.com/Tavish9/any4lerobot/tree/main/ds_version_convert) |
+### 1. Data Collection
+Collect episodes using Meta Quest 3 teleoperation:
+- Follow avp_teleoperate setup
+- Run X episodes of the popcorn task
+- Data saves automatically to /datasets/popcorn/
 
-# 🔖 Release Note
+### 2. Convert Dataset to LeRobot Format
+python unitree_lerobot/utils/convert_unitree_json_to_lerobot.py \
+    --raw-dir $HOME/datasets \
+    --repo-id yourname/popcorn_dataset \
+    --robot_type Unitree_G1_Dex3 \
+    --push_to_hub
 
-### 🏷️ v0.3
+### 3. Train ACT Policy
+python lerobot/scripts/lerobot_train.py \
+    --dataset.repo_id=yourname/popcorn_dataset \
+    --policy.type=act
 
-1.Update [`lerobot dataset v3.0`](https://github.com/huggingface/lerobot/blob/main/docs/source/porting_datasets_v3.mdx).
-
-2.More policy support([`pi05`](https://github.com/huggingface/lerobot/tree/main/src/lerobot/policies/pi05), [`groot`](https://github.com/huggingface/lerobot/tree/main/src/lerobot/policies/groot)).
-
-### 🏷️ v0.2
-
-1.Add `data conversion` and `model deployment` for `brainco` and `inspire1` Dexterous hands.
-
-2.Add the functionality of `replaying the robot dataset`.
-
-3.Add `simulation environment verification` [unitree_sim_isaaclab].
-
-### 🏷️ v0.1
-
-Support `data conversion`, `model deployment`, and `real-world testing` for `G1 + Dex1 + Dex3`.
+### 4. Run on Robot
+python eval_robot/eval_g1.py \
+    --policy.path=outputs/train/.../pretrained_model \
+    --arm=G1_29 \
+    --ee=dex3 \
+    --visualization=true
 
 # 0. 📖 Introduction
 

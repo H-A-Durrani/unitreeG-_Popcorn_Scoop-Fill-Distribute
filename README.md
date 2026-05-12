@@ -24,23 +24,10 @@ python eval_robot/eval_g1.py \
     --ee=dex3 \
     --visualization=true
 
-# 0. 📖 Introduction
-
-This repository is used for `lerobot training validation`(Supports LeRobot datasets version 2.0 and above.) and `unitree data conversion`.
-
-`❗Tips： If you have any questions, ideas or suggestions that you want to realize, please feel free to raise them at any time. We will do our best to solve and implement them.`
-
-| Directory  | Description                                                                                              |
-| ---------- | -------------------------------------------------------------------------------------------------------- |
-| lerobot    | The code in the `lerobot repository` for training; its corresponding commit version number is `0878c68`. |
-| utils      | `unitree data processing tool `                                                                          |
-| eval_robot | `unitree real machine inference verification of the model`                                               |
 
 # 1. 📦 Environment Setup
 
 ## 1.1 🦾 LeRobot Environment Setup
-
-The purpose of this project is to use the [LeRobot](https://github.com/huggingface/lerobot) open-source framework to train and test data collected from Unitree robots. Therefore, it is necessary to install the LeRobot-related dependencies first. The installation steps are as follows, and you can also refer to the official [LeRobot](https://github.com/huggingface/lerobot) installation guide:
 
 ```bash
 # Clone the source code
@@ -109,14 +96,6 @@ If you want to record your own dataset. The open-source teleoperation project [a
 
 ## 2.3 ✂️Data Processing
 
-When you finished the Data Collection step, it may be essential for you to process the data you have been collected. For example, if one of the episodes failed to complete the task, you need to delete the episode, to increase the data's quality.
-
-We have designed a data editor in this project, in order to help users process the data. Currently, it can cut off excess segments in the episodes, and delete the bad episodes.
-
-![](https://oss-global-cdn.unitree.com/static/986a520f8b444784b090a07b9efc6803_1455x1071.jpg)
-
-Before you launch the data editor, you need to install pyqt5.
-
 ```bash
 conda activate unitree_lerobot
 pip install PyQt5
@@ -139,7 +118,6 @@ test_dataset/
     ├── ...
 ```
 
-You can drag the red line directly to seek playback, and drag the red line with Shift on your keyboard to select the playback range, and then trim the selected range with the button `Trim Selected Range`. If you want to delete the current episode, click the button `Delete Current Episode`.
 
 ## 2.4 🛠️ Data Conversion
 
@@ -183,9 +161,6 @@ python unitree_lerobot/utils/convert_unitree_json_to_lerobot.py \
     --robot_type Unitree_G1_Dex3 \
     --push_to_hub
 ```
-
-**Node:** `Unitree_G1_Dex1_Sim` is a robot type used for data collection in unitree_sim_isaaclab
-, with the head equipped with a single-viewpoint camera.
 
 # 3. 🚀 Training
 
@@ -319,8 +294,6 @@ python unitree_lerobot/eval_robot/eval_g1_dataset.py  \
     --send_real_robot=false
 ```
 
-**Note:** If you are using the `unitree_sim_isaaclab` simulation environment, please refer to [unitree_sim_isaaclab](https://github.com/unitreerobotics/unitree_sim_isaaclab) for environment setup and usage instructions.
-
 # 5. 🎬 Replay Datasets On Robot
 
 This section provides instructions on how to replay datasets on the robot.
@@ -346,16 +319,7 @@ python unitree_lerobot/eval_robot/replay_robot.py \
     --visualization=true
 ```
 
-# 6. 🤔 Troubleshooting
-
-| Problem                                                                                                                                                                                                                                     | Solution                                                       |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| **Why use `LeRobot v2.0`?**                                                                                                                                                                                                                 | [Explanation](https://github.com/huggingface/lerobot/pull/461) |
-| **401 Client Error: Unauthorized** (`huggingface_hub.errors.HfHubHTTPError`)                                                                                                                                                                | Run `huggingface-cli login` to authenticate.                   |
-| **FFmpeg-related errors:** <br> Q1: `Unknown encoder 'libsvtav1'` <br> Q2: `FileNotFoundError: No such file or directory: 'ffmpeg'` <br> Q3: `RuntimeError: Could not load libtorchcodec. Likely causes: FFmpeg is not properly installed.` | Install FFmpeg: <br> `conda install -c conda-forge ffmpeg`     |
-| **Access to model `google/paligemma-3b-pt-224` is restricted.**                                                                                                                                                                             | Run `huggingface-cli login` and request access if needed.      |
-
-# 7. 🙏 Acknowledgement
+# 6. Acknowledgement
 
 This code builds upon following open-source code-bases. Please visit the URLs to see the respective LICENSES (If you find these projects valuable, it would be greatly appreciated if you could give them a star rating.):
 

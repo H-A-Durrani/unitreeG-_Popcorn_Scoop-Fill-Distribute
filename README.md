@@ -1,3 +1,18 @@
+This repository is forked from unitreerobotics/unitree_lerobot and contains my implementation of ACT-based imitation learning for bimanual manipulation on the Unitree G1 humanoid.
+Specific contributions:
+
+Designed and collected 300 demonstration episodes via VR teleoperation using Meta Quest 3
+Configured ACT policy with chunk size 20, 3 camera inputs (2x RealSense D405 wrist + binocular head)
+Trained and deployed on physical Unitree G1 hardware achieving 8.5/10 success rate
+Identified and fixed idle-phase jerk failure mode through targeted data collection
+Designed and 3D printed custom cup holder fixture to improve policy stability
+
+Deployed at WeGo Robotics, South Korea. Demo videos available in portfolio.
+## Demo Video
+
+[![Popcorn Seller - Unitree G1 Bimanual Manipulation](https://img.youtube.com/vi/acbhDNI2lkM/0.jpg)](https://www.youtube.com/shorts/acbhDNI2lkM)
+
+> Video credit: WeGo Robotics. This deployment was developed and implemented by me as AI Engineer at WeGo Robotics, South Korea.
 
 ### 1. Data Collection
 Collect episodes using Meta Quest 3 teleoperation:
